@@ -10,4 +10,4 @@ I won't go into that installation, as it may not be relevant to everyone. If the
 
 _My linux of choice is Debian so all commands may differ on your own distribution of choice, if you have any questions please ask away_
 
-[Next](../README2.md)
+[Next](README2.md)
