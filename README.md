@@ -2,7 +2,7 @@
 For more information about this project, visit the blog article at https://linkedin.com/pulse/creating-remote-console-solution-pete-mallam
 
 ## Getting Started
-The first thing you will need is a laptop (in my case, an old 32-bit Dell Inspiron Mini 10) with a working Linux install. 
+The first thing I needed was a laptop (in this case, an old 32-bit Dell Inspiron Mini 10) with a working Linux install. 
 If you want to enable GUI, then go ahead. My installation was all CLI.
 
 I think the very first thing I was forced to do was install the drivers for the Wireless LAN interface, which is an old complaint about Linux.
@@ -13,7 +13,7 @@ _My linux of choice is Debian so all commands may differ on your own distributio
 ### Install your TTY Console
 I used Minicom, a simple TTY Console that I found out about via a couple of Google Searches for the best way to connect to a Cisco 1400 Router.
 
-_To simplify things, switch to **root**:_```sudo su```
+_To simplify things, switch to **root**:_`sudo su`
 ```bash
 apt-get update && apt-get -y upgrade
 apt-get install -y minicom
@@ -62,12 +62,12 @@ Add the user to the **sudo** group (to allow sudo access)
 usermod -a -G sudo consoleuser
 ```
 Update the sudoers file to allow access to minicom _without_ needing to re-enter a password
-1. Open the Sudo Config file: ```visudo```
-2. Add the following line to the end: ```consoleuser  ALL = NOPASSWD: /usr/bin/minicom```
+1. Open the Sudo Config file: `visudo`
+2. Add the following line to the end: `consoleuser  ALL = NOPASSWD: /usr/bin/minicom`
 
 I wanted to block the user from logging in if the Console Cable is not connected, thus ensuring that the only time the user can be logged on is when I'm onsite.
 
-To do this, I added the following lines to ```/home/consoleuser/.bashrc```
+To do this, I added the following lines to `/home/consoleuser/.bashrc`
 ```bash
 echo "****** CHECKING FOR CONSOLE CONNECTION ******"
 if [ -e "/dev/ttyUSB0" ]
@@ -94,7 +94,7 @@ The reason for this is to ensure access is **_only_** for using the remote conso
 
 ## Create a Logon Banner
 
-To make this seem somewhat more professional, I added a banner to the logon process by creating a new file at ```/etc/issue.net```
+To make this seem somewhat more professional, I added a banner to the logon process by creating a new file at `/etc/issue.net`
 ```
    -------------------------------------------
    ----------------  WARNING  ----------------
@@ -111,11 +111,23 @@ be reported to the authorities for further action.
 
 To continue, please enter your password:
 ```
-To enable the banner, I updated ```/etc/ssh/sshd_config``` to add the following line:
+To enable the banner, I updated `/etc/ssh/sshd_config` to add the following line:
 ```
 Banner /etc/issue.net
 ```
 ## Launch my VPN Server
-I'm using OpenVPN for this solution, and to keep things simple you can use the pre-configured OpenVPN Appliance on AWS. It comes with two 'admin' licenses so you shouldn't need more than that.
+I'm using OpenVPN for this solution, and to keep things simple you can use the pre-configured OpenVPN Appliance on AWS. It comes with two 'admin' licenses so I shouldn't need more than that.
 
-Once launched, you will need to configure it.
+Once launched, I needed to configure it.
+
+## Configure SSH
+
+The simplest way to create a connection to my laptop is to script the Bash Login (`/home/consoleuser/.bashrc`) to simply send the user into another SSH connection. 
+
+To do this, I created the same user on my VPN Server:
+```bash
+useradd -m -d /home/consoleuser consoleuser
+passwd consoleuser
+# Enter **_the same_** password for the user as used on the laptop
+```
+
