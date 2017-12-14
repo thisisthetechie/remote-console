@@ -1,4 +1,4 @@
-### Install your TTY Console
+# Install the TTY Console
 I used Minicom, a simple TTY Console that I found out about via a couple of Google Searches for the best way to connect to a Cisco 1400 Router.
 
 _To simplify things, switch to **root**:_`sudo su`
@@ -37,4 +37,4 @@ Assuming you have a USB Console or USB to Serial cable, select **Serial port set
 ```
 _To make a change, enter the letter (eg. A) and follow the instructions._
 
-[Previous](README.md) || [Next](README3.md)
+[Previous - Getting Started](README.md) || [Next - Create a user account](README3.md)

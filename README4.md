@@ -1,4 +1,4 @@
-## Create a Logon Banner
+# Create a Logon Banner
 
 To make this seem somewhat more professional, I added a banner to the logon process by creating a new file at `/etc/issue.net`
 ```
@@ -21,3 +21,5 @@ To enable the banner, I updated `/etc/ssh/sshd_config` to add the following line
 ```
 Banner /etc/issue.net
 ```
+
+[Previous - Create a user account](README3.md) || [Next - Launch my VPN Server](README5.md)
