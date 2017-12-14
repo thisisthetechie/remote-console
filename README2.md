@@ -37,4 +37,4 @@ Assuming you have a USB Console or USB to Serial cable, select **Serial port set
 ```
 _To make a change, enter the letter (eg. A) and follow the instructions._
 
-[README.md]                     [README3.md]
+[Previous](README.md)			[Next](README3.md)
